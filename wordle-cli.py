@@ -43,29 +43,23 @@ After each guess, the color of the letters will change to show how close your gu
 guess_count = 0
 guess_word = ""
 while guess_count < 5:
-# TODO: need to fix the while loop. 
-    while len(guess_word) < 5:
-        guess_word = input("\nGuess a word: ")
-        # TODO: check if characters are letters.
-        # TODO: convert input to lower case
-        if len(guess_word) < 5:
-            print("Your word was not 5 characters, try again.")
-        else:   
-            # need to construct the table showing each letter in a column
-            guess_word_list = list(guess_word)
-            print(guess_word_list)
-
-            wordle_table = PrettyTable()
-            wordle_table.add_column("Letter 1", guess_word_list[0], align="c")
-            wordle_table.add_column("Letter 2", guess_word_list[1], align="c")
-            wordle_table.add_column("Letter 3", guess_word_list[2], align="c")
-            wordle_table.add_column("Letter 4", guess_word_list[3], align="c")
-            wordle_table.add_column("Letter 5", guess_word_list[4], align="c")
-
-            print(wordle_table)
-
-            if guess_word == wordle_word:
-                print("\nYOU WIN!!!\n")
-                sys.exit()
+    guess_word = input("\nGuess a word: ")
+    # TODO: check if characters are letters.
+    # TODO: convert input to lower case
+    #while len(guess_word) < 5:
+        #print("Your word was not 5 characters, try again.")
+        # need to construct the table showing each letter in a column
+    guess_word_list = list(guess_word)
+    print(guess_word_list)
+    wordle_table = PrettyTable()
+    wordle_table.add_column("Letter 1", guess_word_list[0], align="c")
+    wordle_table.add_column("Letter 2", guess_word_list[1], align="c")
+    wordle_table.add_column("Letter 3", guess_word_list[2], align="c")
+    wordle_table.add_column("Letter 4", guess_word_list[3], align="c")
+    wordle_table.add_column("Letter 5", guess_word_list[4], align="c")
+    print(wordle_table)
+    if guess_word == wordle_word:
+        print("\nYOU WIN!!!\n")
+        sys.exit()
             
     guess_count += 1
