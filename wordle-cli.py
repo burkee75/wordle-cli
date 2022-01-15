@@ -39,6 +39,10 @@ Each guess must be a valid 5 letter word. Hit the enter button to submit.
 After each guess, the color of the letters will change to show how close your guess was to the word.
 """)
 
+wordle_table = PrettyTable()
+wordle_table.field_names = ["Letter 1", "Letter 2", "Letter 3", "Letter 4", "Letter 5"]
+
+
 
 guess_count = 0
 guess_word = ""
@@ -49,14 +53,10 @@ while guess_count < 5:
     #while len(guess_word) < 5:
         #print("Your word was not 5 characters, try again.")
         # need to construct the table showing each letter in a column
+    
+    # Convert the guess_word from input into a list so it can be displayed in each Letter column.
     guess_word_list = list(guess_word)
-    print(guess_word_list)
-    wordle_table = PrettyTable()
-    wordle_table.add_column("Letter 1", guess_word_list[0], align="c")
-    wordle_table.add_column("Letter 2", guess_word_list[1], align="c")
-    wordle_table.add_column("Letter 3", guess_word_list[2], align="c")
-    wordle_table.add_column("Letter 4", guess_word_list[3], align="c")
-    wordle_table.add_column("Letter 5", guess_word_list[4], align="c")
+    wordle_table.add_row([guess_word_list[0], guess_word_list[1], guess_word_list[2], guess_word_list[3], guess_word_list[4]])
     print(wordle_table)
     if guess_word == wordle_word:
         print("\nYOU WIN!!!\n")
