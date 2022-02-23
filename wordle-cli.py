@@ -8,20 +8,25 @@ import sys
 # This class will be used to build objects for each letter. Need this to help determine color for output. 
 class LetterObject:
     def __init__(self, letter):
-        self.letter_color = "red"
+        self.letter_color = "white"
         self.letter = letter
 
-    def print_string(self):
+    def print_format(self):
         """This method returns the letter's print string by combining the letter with the color to create 
         a character combo that will print in color."""
-
+        
         if self.letter_color == "white":
-            printable_letter = f"{self.letter}"
+            printable_letter = f"[white]{self.letter}[/white]"
             return printable_letter
 
-        elif self.letter_color == "red":
-            printable_letter = f"[red]{self.letter}[/red]"
+        elif self.letter_color == "yellow":
+            printable_letter = f"[yellow]{self.letter}[/yellow]"
             return printable_letter
+
+        elif self.letter_color == "green":
+            printable_letter = f"[green]{self.letter}[/green]"
+            return printable_letter
+    
 
 
 # first we must load only 5 letter words to save RAM
@@ -84,10 +89,15 @@ while guess_count < 5:
 
     # we need to now get each letter plus color to add to our table
     for item in range(len(guess_word_list)):
-        guess_word_list[item] = guess_word_list[item].print_string()
+        if guess_word_list[item].letter in wordle_word:
+            guess_word_list[item].letter_color = "green"
+        else:
+            guess_word_list[item].letter_color = "white"
+
+        #guess_word_list[item] = guess_word_list[item].print_format()
         
     for i in guess_word_list:
-        print(i)
+        print(i.print_format())
 
     #wordle_table.add_row([guess_word_list[0], guess_word_list[1], guess_word_list[2], guess_word_list[3], guess_word_list[4]])
     #print(wordle_table)
