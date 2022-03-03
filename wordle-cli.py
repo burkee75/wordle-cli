@@ -44,6 +44,10 @@ word_list_range = randrange(len(word_list))
 
 # wordle_word is manually set for testing purposes right now. 
 wordle_word = "hello"
+wordle_word_list = []
+for a in wordle_word:
+    wordle_word_list.append(a)
+
 
 # wordle_word = word_list[word_list_range]
 # for debug
@@ -75,6 +79,7 @@ guess_word = ""
 guess_word_list = []
 
 while guess_count < 5:
+    # TODO: need to reset objects (delete maybe?) after a bad guess. Right now color will stay white. 
     guess_word = input("\nGuess a word: ")
     # TODO: check if characters are letters.
     # TODO: convert input to lower case
@@ -87,22 +92,29 @@ while guess_count < 5:
         letter_object = LetterObject(letter)
         guess_word_list.append(letter_object)
 
-    # we need to now get each letter plus color to add to our table
-    for item in range(len(guess_word_list)):
-        if guess_word_list[item].letter in wordle_word:
-            guess_word_list[item].letter_color = "green"
-        else:
-            guess_word_list[item].letter_color = "white"
+    for d in range(len(guess_word_list)):
+        if guess_word_list[d].letter in wordle_word_list:
+            guess_word_list[d].letter_color = "yellow"
+            # debug
+            print(f"Letter {d} is white")
+
+    for b in range(len(wordle_word_list)):
+        #print(guess_word_list[b].print_format())
+        if guess_word_list[b].letter == wordle_word_list[b]:
+            guess_word_list[b].letter_color = "green"
+            print(f"Letter {b} is green")
+    
 
         #guess_word_list[item] = guess_word_list[item].print_format()
         
-    for i in guess_word_list:
-        print(i.print_format())
+    for c in guess_word_list:
+        print(c.print_format())
 
     #wordle_table.add_row([guess_word_list[0], guess_word_list[1], guess_word_list[2], guess_word_list[3], guess_word_list[4]])
     #print(wordle_table)
     if guess_word == wordle_word:
         print("\nYOU WIN!!!\n")
         sys.exit()
-            
+
+    guess_word_list = []       
     guess_count += 1
