@@ -74,20 +74,18 @@ def main():
         # for debug
         #print(guess_word_list)
 
-        for guess in guess_word_list:
-            table_row = []
-            for i in range(len(guess)):
-                if guess[i] == wordle_word[i]:
-                    letter_color = f"[green]{guess[i]}[/green]"
-                elif guess[i] in wordle_word:
-                    letter_color = f"[yellow]{guess[i]}[/yellow]"
-                else:
-                    letter_color = f"[white]{guess[i]}[/white]"
-                table_row.append(letter_color)
-            # debug
-            print(f"var table_row = {table_row}")
-
-            table.add_row(table_row[0], table_row[1], table_row[2], table_row[3], table_row[4])
+        table_row = []
+        for i in range(len(guess_word)):
+            if guess_word[i] == wordle_word[i]:
+                letter_color = f"[bold green]{guess_word[i]}[/bold green]"
+            elif guess_word[i] in wordle_word:
+                letter_color = f"[bold yellow]{guess_word[i]}[/bold yellow]"
+            else:
+                letter_color = f"[bold white]{guess_word[i]}[/bold white]"
+            table_row.append(letter_color)
+        # debug
+        print(f"var table_row = {table_row}")
+        table.add_row(table_row[0], table_row[1], table_row[2], table_row[3], table_row[4])
 
         print(table)
         if guess_word == wordle_word:
