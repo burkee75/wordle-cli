@@ -1,7 +1,7 @@
 from string import printable
-from prettytable import PrettyTable
 from random import randrange
 from rich import print
+from rich.table import Table
 import sys
 
 
@@ -32,13 +32,15 @@ def main():
     # for debug
     print(f"Debug: Wordle word is: '{wordle_word}'")
 
-    ## Each column is a list that will be added to during each guess.
-    letter_1_list = []
-    letter_2_list = []
-    letter_3_list = []
-    letter_4_list = []
-    letter_5_list = []
 
+    table = Table(title="WORDLE")
+    table.add_column("Letter 1", justify="center")
+    table.add_column("Letter 2", justify="center")
+    table.add_column("Letter 3", justify="center")
+    table.add_column("Letter 4", justify="center")
+    table.add_column("Letter 5", justify="center")
+    print(table)
+   
 
 
     print("""\nWORDLE-CLI
@@ -48,8 +50,6 @@ def main():
     After each guess, the color of the letters will change to show how close your guess was to the word.
     """)
 
-    wordle_table = PrettyTable()
-    wordle_table.field_names = ["Letter 1", "Letter 2", "Letter 3", "Letter 4", "Letter 5"]
 
 
     # initialize some varibales
@@ -75,24 +75,21 @@ def main():
         #print(guess_word_list)
 
         for guess in guess_word_list:
-            output = ""
+            table_row = []
             for i in range(len(guess)):
                 if guess[i] == wordle_word[i]:
                     letter_color = f"[green]{guess[i]}[/green]"
-                    output = output + letter_color
                 elif guess[i] in wordle_word:
                     letter_color = f"[yellow]{guess[i]}[/yellow]"
-                    output = output + letter_color
-
                 else:
-                    letter_color = guess[i]
-                    output = output + letter_color
+                    letter_color = f"[white]{guess[i]}[/white]"
+                table_row.append(letter_color)
+            # debug
+            print(f"var table_row = {table_row}")
 
-            print(output)
+            table.add_row(table_row[0], table_row[1], table_row[2], table_row[3], table_row[4])
 
-
-        #wordle_table.add_row([guess_word_list[0], guess_word_list[1], guess_word_list[2], guess_word_list[3], guess_word_list[4]])
-        #print(wordle_table)
+        print(table)
         if guess_word == wordle_word:
             print("\nYOU WIN!!!\n")
             sys.exit()
